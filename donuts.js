@@ -23,13 +23,13 @@ function mainLoop() {
     ctx.font = "30px Arial";
    
 
-    for (let n = 0; n < donutAmount; n++) {
-        ctx.drawImage(donut, x[n],y[n],80,80);
-        y[n] += speed[n];
+    for (let n = 0; n < donuts.length; n++) {
+        ctx.drawImage(donut, donuts[n].x, donuts[n].y,80,80);
+        donuts[n].y += donuts[n].speed;
         checkForHits(n);
-        if (y[n] > 480) {
-            y[n] = -80;
-            x[n] = Math.random()*600;
+        if (donuts[n].y > 480) {
+            donuts[n].y = -80;
+            donuts[n].x = Math.random()*600;
             score -= 5;
         }
     }
@@ -65,10 +65,10 @@ function keyLifted(e){
 }
 
 function checkForHits(n) {
-    if (Math.abs(400-y[n] < 60) && Math.abs(dogX-x[n]) < 60) {
+    if (Math.abs(400-donuts[n].y < 60) && Math.abs(dogX-donuts[n].x) < 60) {
         score += 1;
-        y[n] = -80;
-        x[n] = Math.random()*600;
+        donuts[n].y = -80;
+        donutsn[n].x = Math.random()*600;
         beep.play();
     }
 }
@@ -84,8 +84,9 @@ function gameOver() {
 let SpawnTimer = setInterval(SpawnStuff,2000);
 
 function SpawnStuff(){
-    donutAmount++
+    donuts.push(new Donut(Math.random()*600, 0, Math.random()*3))
+    /*donutAmount++
     x.push(Math.random()*600);
     y.push(0);
-    speed.push(Math.random()*3);
+    speed.push(Math.random()*3);*/
 }
