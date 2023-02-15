@@ -47,10 +47,7 @@ document.onkeydown = keyPressed;
 function keyPressed(e) {
     let k = e.keyCode;
     if(k == 13) {
-        donutAmount++
-        x.push(325);
-        y.push(0);
-        speed.push(3);
+        newDonut();
     }
     if (k == 37) {changeX = -50;}
     if (k == 39) {changeX = 50;}
@@ -84,9 +81,13 @@ function gameOver() {
 let SpawnTimer = setInterval(SpawnStuff,2000);
 
 function SpawnStuff(){
-    donuts.push(new Donut(Math.random()*600, 0, Math.random()*3))
+   newDonut();
     /*donutAmount++
     x.push(Math.random()*600);
     y.push(0);
     speed.push(Math.random()*3);*/
+}
+
+function newDonut(){
+    donuts.push(new Donut(Math.random()*600, 0, Math.random()*3));
 }
